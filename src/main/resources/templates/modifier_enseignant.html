@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Modifier les informations</title>
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" th:href="@{/css/grh.css}"/>
+	</head>
+	<body>
+	
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:include="fragments/header :: nav (active = 'EN')">
+		
+		</nav>
+	
+		<div class="table-container" id="enseignantP">
+			<div class="card">
+				<div class="card-header">formulaire de modification</div>
+					<div class="card-body">
+						<form th:object="${enseignant}" th:action="${type} == 'EP' ? @{/ModifierEnseignantPermanent} : @{/ModifierEnseignantVacataire}" method="post" name="enseignantPForm">
+                  <div class="form-row col-md-12">
+                   <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                            <label for="nomEt">Nom :</label>
+                            <input type="text" id="nomEt" class="form-control"  th:field="*{nom}"/>
+		                    </div>
+		                    <div class="form-group col-md-12">
+		                            <label for="prenomEt">Prénom :</label>
+		                            <input type="text" id="prenomEt" class="form-control" th:field="*{prenom}" required />
+		                    </div>
+		                    <div class="form-group col-md-12">
+		                        <label for="dateNaissanceEt">Date de naissance :</label>
+		                        <input type="date" id="dateNaissanceEt" class="form-control" th:field="*{dateNaissance}" required/>
+		                    </div>
+		                    <div class="form-group col-md-12">
+		                        <label for="cinEt">CIN :</label>
+		                        <input type="text" id="cinEt" class="form-control" th:field="*{CIN}"/>
+		                    </div>
+		                    <div class="form-group col-md-12">
+		                        <label for="sexeEt">Sexe :</label>
+		                        <select id="sexeEt" th:field="*{sexe}" required>
+		                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+		                        </select>
+		                    </div>
+		                    <div class="form-group col-md-12">
+		                        	<label for="echelleEt">Echelle</label>
+		                        	<select id="echelleEt" th:field="*{echelle}" required>
+		                           		<option th:each="echelle:${T(org.emi.GestionDesRH.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
+		                        	</select>
+		                    	</div>
+		                   </div>
+		                  </div>
+		                  <div class="form-group col-md-12">
+		                    <div class="form-row col-md-12">
+		                    
+		                    	<div class="form-group col-md-6">
+		                            <label for="nomPrenomArabeEt">Nom et prénom en arabe :</label>
+		                            <input type="text" id="nomPrenomArabeEt" class="form-control" th:field="*{nomPrenomArabe}" required />
+		                        </div>
+		                    
+		                        <div class="form-group col-md-6">
+		                        	<label for="gradeEt">Grade</label>
+		                        	<select id="gradeEt" th:field="*{grade}" required>
+		                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+		                        	</select>
+		                    	</div>
+		                    </div>
+		                    <div class="form-row col-md-12">
+		                    	<div class="form-group col-md-6">
+		                            <label for="dateAffectationEt">Date d'affectation :</label>
+		                            <input type="text" id="dateAffectaionEt" class="form-control" th:field="*{dateAffectation}" required/>
+		                        </div>
+		                        <div class="form-group col-md-6">
+		                            <label for="telephoneEt">Téléphone :</label>
+		                            <input type="text" id="telephoneEt" class="form-control" th:field="*{telephone}" required />
+		                        </div>
+		                        
+		                    </div>
+		                    <div class="form-row col-md-12">
+		                        <div class="form-group col-md-6">
+		                            <label for="emailPersoEt">Email personnel :</label>
+		                            <input type="email" id="emailPersoEt" class="form-control" th:field="*{emailPersonnel}" required />
+		                        </div>
+		                        <div class="form-group col-md-6">
+		                            <label for="emailProEt">Email professionnel :</label>
+		                            <input type="email" id="emailProEt" class="form-control" th:field="*{emailProfessionnel}" required />
+		                        </div>
+		                        <div th:if="${type} == 'EV'" class="form-group col-md-6">
+		                            <label for="etablissement">Etablissement :</label>
+		                            <input type="text" id="etablissement" class="form-control" th:field="*{etablissement}" required />
+		                        </div>
+		                        <div th:if="${type} == 'EV'" class="form-group col-md-6">
+		                            <label for="etatPaiement">Etat de Payement :</label>
+		                            <input type="checkbox" id="etatPaiement" class="form-control" th:field="*{etatPaiement}" />
+		                        </div>
+		                        <div class="form-group col-md-12">
+			                        <label for="motDePasseEt">Mot de passe :</label>
+			                        <input type="password" id="motDePasseEt" class="form-control" th:field="*{motDePasse}"/>
+                    			</div>
+			                        <input type="hidden" th:field="*{id}" />
+		                    </div>
+		 
+		                    <div class="row col-md-12">
+		                    	<div class="form-group col-md-12">
+			                        <div class="form-actions floatRight">
+			                            <input type="submit"  value="Enregistrer" class="btn btn-primary btn-sm">
+			                            <button type="button" class="btn btn-warning btn-sm" >Vider les champs</button>
+			                        </div>
+		                        </div>
+		                    </div>
+		                  </div>
+		                </form>
+					</div>
+				</div>
+        </div>
+		
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+</head>
+<body>
+	<nav th:fragment="nav (active)">
+		  <a class="navbar-brand" th:href="@{/}">GRH</a>
+		    <ul class="navbar-nav">
+		      <li th:class="${active} == 'ET' ? 'nav-item active' : 'nav-item'">
+		        <a class="nav-link" th:href="@{/etudiants}">Etudiants</a>
+		      </li>
+		      <li th:class="${active} == 'EN' ? 'nav-item dropdown active' : 'nav-item dropdown '">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Enseignants</a>
+		        <div class="dropdown-menu">
+		          <a class="dropdown-item" th:href="@{/enseignantsPermanents}">Permanents</a>
+		          <a class="dropdown-item" th:href="@{/enseignantsVacataires}">Vacataires</a>
+		        </div>
+		      </li>
+		      <li th:class="${active} == 'CA' ? 'nav-item active' : 'nav-item '">
+		        <a class="nav-link" th:href="@{/cadresAdministratifs}">Cadres administratifs</a>
+		      </li>
+		    </ul>
+		</nav>
+</body>
+</html>

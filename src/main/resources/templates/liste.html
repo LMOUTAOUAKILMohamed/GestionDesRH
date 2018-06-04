@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Insert title here</title>
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" th:href="@{/css/gestionRH.css}"/>
+	</head>
+	<body>
+				<div class="container">
+  <h2>Basic Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Filtres</h4>
+        </div>
+        <form th:action="@{/rechercheMulticriteresEtudiants}" th:object="${criteresWrapper}" method="post">
+        <div class="modal-body">
+          <div class="form-row">
+          	<div class="form-group" th:each="c, status : *{criteres}">
+          		<label th:for="*{criteres[__${status.index}__].propriete}" th:text="*{criteres[__${status.index}__].propriete}"></label>
+          		<input type="hidden" th:field="*{criteres[__${status.index}__].propriete}" />
+          		<input type="hidden" th:field="*{criteres[__${status.index}__].operation}"/>
+          		<input type="text" th:id="*{criteres[__${status.index}__].propriete}" th:field="*{criteres[__${status.index}__].valeur}"/>
+          	</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+		  <input class="btn btn-default" type="submit" value="chercher" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+		<div class="container table-wrapper">
+			<div class="card table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th class="essential persist" >Matricule</th>
+								<th class="essential">Photo</th>
+								<th class="essential">CIN</th>
+								<th class="optional">CNE</th>
+								<th class="essential">Nom</th>
+								<th class="essential">Prénom</th>
+								<th class="optional">الاسم</th>
+								<th class="essential" >Date d'inscription</th>
+								<th class="essential" >Téléphone</th>
+								<th class="essential" >Email Professionnel</th>
+								<th class="essential" >Email Personnel</th>
+								<th class="optional" >Sexe</th>
+								<th class="optional" >Date de Naissance</th>
+								<th class="optional" >Adresse</th>
+								<th class="essential persist">options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="personne :${liste.content}">
+								<td th:text="${personne.matricule}" ></td>
+								<td><a th:href="@{/uploads/images/${personne.id}.jpg}">image</a></td>
+								<td th:text="${personne.CIN}" ></td>
+								<td th:text="${personne.CNE}" ></td>
+								<td th:text="${personne.nom}" ></td>
+								<td th:text="${personne.prenom}" ></td>
+								<td th:text="${personne.nomPrenomArabe}" ></td>
+								<td th:text="${personne.dateInscription}" ></td>
+								<td th:text="${personne.telephone}" ></td>
+								<td th:text="${personne.emailProfessionnel}" ></td>
+								<td th:text="${personne.emailPersonnel}" ></td>
+								<td th:text="${personne.sexe}" ></td>
+								<td th:text="${personne.dateNaissance}" ></td>
+								<td th:text="${personne.adresse}" ></td>
+								<td>
+									<a th:href="@{/DetailsEtudiant/(id = ${personne.id})}"><img alt="Détails" th:src="@{/icons/ic_details.png}"></a>
+									<a th:href="@{/ModifierEtudiant/(id = ${personne.id})}"><img alt="Modifier" th:src="@{/icons/ic_modifier.png}"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<hr/>
+					<ul class="nav nav-pills">
+						<li class="nav-item" th:each=" i : ${#numbers.sequence(0, liste.totalPages-1)}">
+							<a th:href="@{/etudiants/(page = ${i})}" th:text="${i}" class="nav-link" th:classappend="${pageCourante}==${i}?'active':''"></a>
+						</li>
+					</ul>
+			</div>
+		<!--</div>-->
+		<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/customJS.js}"></script>
+	</body>
+</html>

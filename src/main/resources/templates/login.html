@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Authentification</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<h1>Welcome to EMI's Human Ressources Management Application</h1>
+	<div class="login-box">
+		<img th:src="@{/images/logo.jpg}" class="logo">
+		<form th:action="@{/login}" method="post">
+			<p>
+				<span class="glyphicon">&#xe008;</span>
+				<input type="text" name="username" placeholder="Entrer Username">
+			</p>
+			<p>
+				<span class="glyphicon">&#xe033;</span>
+				<input type="password" name="password" placeholder="Entrer Password">
+			</p>
+				<input type="submit" name="submit" value="Login">
+				<a href="#">Forget Password ?</a>
+		</form>
+
+</div>
+</body>

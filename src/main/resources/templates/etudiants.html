@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/grh.css}"/>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:include="fragments/header :: nav (active = 'ET')">
+		
+		</nav>
+	<div class="table-container">
+    <div class="border">
+	<div class="card">
+		<div class="card-header">Filtres</div>
+		<div class="card-body" id="filtresContainer">
+		<form>
+		<div class="form-row">
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="matriculeInput" placeholder="matricule"/>
+			</div>
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="cinInput" placeholder="CIN"/>
+			</div>
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="cneInput" placeholder="CNE"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="nomInput" placeholder="nom"/>
+			</div>
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="prenomInput" placeholder="prénom"/>
+			</div>
+			<div class="col mb-3">
+				<input class="form-control" type="text" id="emailProInput" placeholder="email professionnel"/>
+			</div>
+		</div>
+		
+		<div  class="form-row">
+			<div class="col">
+				<input class="form-control" type="text" id="emailPersoInput" placeholder="email personnel"/>
+			</div>
+			<div class="col">
+				<input class="form-control" type="text" id="adresse" placeholder="adresse"/>
+			</div>
+			<div class="col mb-3">
+				<select class="form-control" id="promotionInput" >
+					<option th:each="p : ${#numbers.sequence(minPromotion, maxPromotion)}" th:value="${p}" th:text="${p}"/>
+				</select>
+			</div>
+			<div class="col">
+				<button type="button" class="btn btn-primary" id="btnChercher">Filtrer</button>
+				<button type="button" class="btn btn-light" id="btnViderChamps">Annuler les filtres</button>
+			</div>
+		</div>
+			</form>
+		</div>
+		
+	</div>
+	</div>
+	</div>
+	<div class="table-container">
+		<div class="card border">
+			<div class="card-header">Liste des étudiants</div>
+			<div class="card-body">
+				<div class="table-container row">
+		
+				   <div class="col-6">
+				      <a th:href="@{/inscription}"><button class="btn btn-primary" id="btnAjouter">Inscrire un etudiant</button></a>
+				   </div>
+					
+				   <div class="col-6">
+				   	  <form th:action="@{/importExcelFile}" method="post" enctype="multipart/form-data">
+						<div class="input-group">
+						  <div class="custom-file">
+						    <input class="custom-file-input" type="file" id="importExcelFile" name="ExcelFile"/>
+						    <label class="custom-file-label" for="inputGroupFile04">Choisir un fichier Excel</label>
+						  </div>
+						  <div class="input-group-append">
+						   <input class="btn btn-success" type="submit" value="Inscrire la liste Excel"/>
+						  </div>
+						</div>
+					</form>
+				   </div>
+					
+				</div>
+				
+					<table class="table table-hover" id="etudiantsTable">
+						<thead class="thead-dark">
+							<tr>
+								<th class="essential persist" >Matricule</th>				
+								<th class="essential">CIN</th>
+								<th class="essential">Nom</th>
+								<th class="essential">Prénom</th>
+								<th class="essential" >Téléphone</th>
+								<th class="essential" >Email Professionnel</th>
+								<th class="essential persist">options</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					
+					<div class="container">
+						<div class="row">
+							<div class="col-9 align-items-center text-center">
+								<ul class="pagination">
+								  <li class="page-item"><button class="page-link" id="previousPage"><!--<span class="glyphicon">&#xe091;</span>--> prec </button></li>
+								  <li class="page-item"><div class="page-link" id="currentPage">1</div></li>
+								  <li class="page-item"><button class="page-link" id="nextPage"><!--<span class="glyphicon">&#xe092;</span>--> suiv </button></li>
+								</ul>
+							</div>
+							<div class="col-1 align-items-center text-primary text-left">
+								<span id="totalPages"></span> pages
+							</div>
+							<div class="col align-items-center text-primary text-right">
+								<span id="totalElements"></span> étudiants
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	
+</body>
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/etudiants.js}"></script>
+</html>

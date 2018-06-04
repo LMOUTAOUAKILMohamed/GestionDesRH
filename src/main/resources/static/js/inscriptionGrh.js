@@ -1,0 +1,8 @@
+/**
+ * 
+ */
+
+
+	function resetFields(){
+		$('form').reset();
+	}

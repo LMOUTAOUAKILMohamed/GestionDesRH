@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+	
+		<div class="container">
+                	<form th:action="@{/ModifierCadreAdministratif}" th:object="${cadreAdministratif}" method="post" name="cadreAdministratifForm">
+                  <div class="form-row col-md-12">
+                   <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                            <label for="nomEt">Nom :</label>
+                            <input type="text" id="nomEt" class="form-control" th:field="*{nom}"/>
+                    </div>
+                    <div class="form-group col-md-12">
+                            <label for="prenomEt">Prénom :</label>
+                            <input type="text" id="prenomEt" class="form-control" th:field="*{prenom}" required />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="dateNaissanceEt">Date de naissance :</label>
+                        <input type="date" id="dateNaissanceEt" class="form-control" th:field="*{dateNaissance}" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="cinEt">CIN :</label>
+                        <input type="text" id="cinEt" class="form-control" th:field="*{CIN}"/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="sexeEt">Sexe :</label>
+                        <select id="sexeEt" th:field="*{sexe}" required>
+                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        	<label for="fonctionEt">Fonction</label>
+                        	<select id="fonctionEt" th:field="*{fonction}" required>
+                           		<option th:each="fonction:${T(org.emi.GestionDesRH.enums.Fonction).values()}" th:value="${fonction}" th:text="${fonction}"></option>
+                        	</select>
+                    	</div>
+                   </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <div class="form-row col-md-12">
+                    
+                    	<div class="form-group col-md-6">
+                            <label for="nomPrenomArabeEt">Nom et prénom en arabe :</label>
+                            <input type="text" id="nomPrenomArabeEt" class="form-control" th:field="*{nomPrenomArabe}" required />
+                        </div>
+                    
+                        <div class="form-group col-md-6">
+                        	<label for="gradeEt">Grade</label>
+                        	<select id="gradeEt" th:field="*{grade}" required>
+                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+                        	</select>
+                    	</div>
+                    </div>
+                    <div class="form-row col-md-12">
+                    	<div class="form-group col-md-6">
+                            <label for="dateAffectationEt">Date d'affectation :</label>
+                            <input type="date" id="dateAffectaionEt" class="form-control" th:field="*{dateAffectation}" required/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telephoneEt">Téléphone :</label>
+                            <input type="text" id="telephoneEt" class="form-control" th:field="*{telephone}" required />
+                        </div>
+                        
+                    </div>
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-6">
+                            <label for="emailPersoEt">Email personnel :</label>
+                            <input type="email" id="emailPersoEt" class="form-control" th:field="*{emailPersonnel}" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="emailProEt">Email professionnel :</label>
+                                <input type="email" id="emailProEt" class="form-control" th:field="*{emailProfessionnel}" required />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Mot de passe :</label>
+                        <input type="password" id="motDePasseEt" class="form-control" th:field="*{motDePasse}" required />
+                    </div>
+ 
+                    <div class="row col-md-12">
+                    	<div class="form-group col-md-12">
+	                        <div class="form-actions floatRight">
+	                            <input type="submit"  value="Enregistrer" class="btn btn-primary btn-sm">
+	                            <button type="button" class="btn btn-warning btn-sm" >Vider les champs</button>
+	                        </div>
+                        </div>
+                    </div>
+                  </div>
+                </form>
+                </div>
+	
+	</body>
+</html>

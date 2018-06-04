@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Liste des enseignants</title>
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" th:href="@{/css/grh.css}"/>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">GRH</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		    <div class="navbar-nav">
+		      <a class="nav-item nav-link" th:href="@{/GestionDesRH/inscription}">Inscription <span class="sr-only">(current)</span></a>
+		      <a class="nav-item nav-link" th:href="@{/allEtudiants}">Etudiants <span class="sr-only">(current)</span></a>
+		      <a class="nav-item nav-link active" th:href="@{/enseignants}">Enseignants <span class="sr-only">(current)</span></a>
+		    </div>
+		  </div>
+		</nav>
+		<div>
+			<div>
+			<!-- chemin vers la page -->
+			</div>
+			<div>
+				<!-- ajout -->
+				<a th:href="@{/GestionDesRH/inscription}"><button id="btnAjouter">Ajouter un enseignant</button></a>
+			</div>
+			<div>
+				<!-- rechercher -->
+			</div>
+			<div>
+				<!-- zone des filtres -->
+			</div>
+			<div>
+				<!-- colonnes a afficher -->
+			</div>
+			<div>
+				<table class="table">
+					<thead>
+							<tr>
+								<th class="essential persist">CIN</th>
+								<th class="essential" >Type</th>
+								<th class="essential">Nom</th>
+								<th class="essential">Prénom</th>
+								<th class="optional">الاسم</th>
+								<th class="essential" >Date d'affectation</th>
+								<th class="essential" >Téléphone</th>
+								<th class="essential" >Email Professionnel</th>
+								<th class="essential" >Email Personnel</th>
+								<th class="optional" >Sexe</th>
+								<th class="optional" >Date de Naissance</th>
+								<th class="optional" >Adresse</th>
+								<th class="essential" >Grade</th>
+								<th class="essential" >Echelle</th>
+								<th class="essential" >Etablissement d'attache</th>
+								<th class="optional">Etat de paiement</th>
+								<th class="essential persist">options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="personne :${liste.content}">
+								<td th:text="${personne.CIN}" ></td>
+								<td th:text="${personne.type} == 'EP' ? 'Permanent' : 'Vacataire'"></td>
+								<td th:text="${personne.nom}" ></td>
+								<td th:text="${personne.prenom}" ></td>
+								<td th:text="${personne.nomPrenomArabe}" ></td>
+								<td th:text="${personne.dateAffectation}" ></td>
+								<td th:text="${personne.telephone}" ></td>
+								<td th:text="${personne.emailProfessionnel}" ></td>
+								<td th:text="${personne.emailPersonnel}" ></td>
+								<td th:text="${personne.sexe}" ></td>
+								<td th:text="${personne.dateNaissance}" ></td>
+								<td th:text="${personne.adresse}" ></td>
+								<td th:text="${personne.grade}" ></td>
+								<td th:text="${personne.echelle}"></td>
+								<!--<span th:if="${personne.type} == 'EV'"></span>-->
+								<td th:text=" ${personne.type} == 'EV'? ${personne.etablissement} : '-'" ></td>
+								<td th:text=" ${personne.type} == 'EV'? (${personne.etatPaiement}? 'Payé' : 'Non payé') : '-'" ></td>
+								<td>
+									<a th:href="@{/DetailsEnseignant/(id = ${personne.id})}"><img alt="Détails" th:src="@{/icons/ic_details.png}"></a>
+									<a th:if="${personne.type} == 'EP'" th:href="@{/ModifierEnseignantPermanent/(id = ${personne.id})}"><img alt="Modifier" th:src="@{/icons/ic_modifier.png}"></a>
+									<a th:if="${personne.type} == 'EV'" th:href="@{/ModifierEnseignantVacataire/(id = ${personne.id})}"><img alt="Modifier" th:src="@{/icons/ic_modifier.png}"></a>
+								</td>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+			<hr/>
+			<ul class="nav nav-pills">
+				<li class="nav-item" th:each=" i : ${#numbers.sequence(0, liste.totalPages-1)}">
+					<a th:href="@{/enseignants/(page = ${i})}" th:text="${i}" class="nav-link" th:classappend="${pageCourante}==${i}?'active':''"></a>
+				</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	</body>
+</html>
