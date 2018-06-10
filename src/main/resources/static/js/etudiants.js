@@ -12,9 +12,10 @@ $(document).ready(function() {
 			
 			function chercher(page){
 				var strPage = searchParams() == "" ? "?page=" + page : "&page=" + page;
+				var action = window.location.pathname == "/etudiants" ? "/rechercher/" : "/rechercherArchive/" ;
 				$.ajax({
 					type : "GET",
-					url : root + "/rechercher/" + searchParams() + "" + strPage,
+					url : root + action + searchParams() + "" + strPage,
 					success: function(result){
 						console.log("in Success: ", result);
 						$('#etudiantsTable tbody').empty();
@@ -119,10 +120,13 @@ $(document).ready(function() {
 			function etudiantToRow(i, etudiant){
 				
 				if( etudiant.photo == true ){
-					image = etudiant.id;
+					image = etudiant.matricule;
 				}else{
 					image = 0;
 				}
+				
+				urlCv = etudiant.cv == true ? '<a href="/uploads/cvs/' + etudiant.matricule + '.pdf">Télécharger</a>' : 'Pas de cv';
+				urlModifier = window.location.pathname == "/etudiants" ? "ModifierEtudiant" : "ModifierEtudiantArchive";
 				
 				return '<tr onClick="show_hide_row(\'hidden_row' + i + '\')">' +
 				'<td>' + etudiant.matricule + '</td>' +
@@ -133,7 +137,7 @@ $(document).ready(function() {
 				'<td>' + etudiant.emailProfessionnel + '</td>' +
 				'<td>' +
 					'<div class="btn-group">'+
-					 '<a href="/ModifierEtudiant/?id=' + etudiant.id + '"><button class="btn btn-primary" >modifier</button></a>'+
+					 '<a href="/' + urlModifier + '/?id=' + etudiant.id + '"><button class="btn btn-primary" >modifier</button></a>'+
 					 //'<a href="/SupprimerEtudiant/?id=' + etudiant.id + '" ><button class="btn btn-danger" >supprimer</button></a>'+
 					'</div>'
 				+ '</td>' +
@@ -146,7 +150,8 @@ $(document).ready(function() {
 			  			+'<label class="infoSecond">Nom et prénom en arabe : </label> ' + etudiant.nomPrenomArabe + '</br>'
 			  			+'<label class="infoSecond">Sexe : </label> ' + etudiant.sexe + '</br>'
 			  			+'<label class="infoSecond">Date de Naissance : </label> ' + etudiant.dateNaissance + '</br>'
-			  			+'<label class="infoSecond">Email Personnel : </label> ' + etudiant.emailPersonnel
+			  			+'<label class="infoSecond">Email Personnel : </label> ' + etudiant.emailPersonnel + '</br>'
+			  			+'<label class="infoSecond">CV : </label> ' + urlCv
 			  		+ '</p></div>'
 			  	+ '</div></td></tr>';
 				
@@ -170,3 +175,9 @@ $(document).ready(function() {
 			    $(this).val(''); // "this" is the current element in the loop
 			});
 		}
+		
+		/*$( "#callConfirm" ).click(function() {
+			Bootpop.ask('Voulez-vous archiver cette promotion?', { title:'Confirmation d\'archivage', size: 'small'});
+		});*/
+
+		

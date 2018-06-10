@@ -14,7 +14,9 @@
 		<div class="card">
 			<div class="card-header">formulaire de modification</div>
 			<div class="card-body">
-				<form th:action="@{/AjouterEtudiant}" th:object="${etudiant}" method="post" enctype="multipart/form-data" name="etudiantForm">
+			<span th:text="${type}"></span>
+			<span th:text="${#strings.toString(type)} == 'archive'"></span>
+				<form th:action="${#strings.toString(type)} == 'etudiant' ? @{/AjouterEtudiant} : @{/ModifierEtudiantArchive}" th:object="${etudiant}" method="post" enctype="multipart/form-data" name="etudiantForm">
                   <div class="form-row col-md-12">
                    <div class="form-group col-md-6">
                     <div class="form-group col-md-12">
@@ -36,7 +38,7 @@
                     <div class="form-group col-md-12">
                         <label for="sexeEt">Sexe :</label>
                         <select id="sexeEt" th:field="*{sexe}" required>
-                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                           <option th:each="sexe:${T(ma.ac.emi.info.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
                         </select>
                     </div>
                    </div>

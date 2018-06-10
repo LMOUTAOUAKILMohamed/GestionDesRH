@@ -21,6 +21,9 @@
 		      <li th:class="${active} == 'CA' ? 'nav-item active' : 'nav-item '">
 		        <a class="nav-link" th:href="@{/cadresAdministratifs}">Cadres administratifs</a>
 		      </li>
+		      <li th:class="${active} == 'AET' ? 'nav-item active' : 'nav-item'">
+		        <a class="nav-link" th:href="@{/archive}">Archive etudiants</a>
+		      </li>
 		    </ul>
 		</nav>
 </body>

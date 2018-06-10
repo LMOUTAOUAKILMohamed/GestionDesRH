@@ -5,9 +5,10 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/grh.css}"/>
+	<link th:href="@{css/jquery.bootpop.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:include="fragments/header :: nav (active = 'ET')">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:include="fragments/header :: nav (active = ${type == 'etudiants' ? 'ET' : 'AET'})">
 		
 		</nav>
 	<div class="table-container">
@@ -64,9 +65,17 @@
 	</div>
 	<div class="table-container">
 		<div class="card border">
-			<div class="card-header">Liste des étudiants</div>
+			<div th:if="${type=='etudiants'}" class="card-header">Liste des étudiants</div>
+			<div th:if="${type=='archive'}" class="card-header">Archive des étudiants</div>
 			<div class="card-body">
-				<div class="table-container row">
+				<div class="row" th:if="${type=='etudiants'}">
+					<select class="form-control col-2" id="promotionInput" >
+						<option th:each="p : ${#numbers.sequence(minPromotion, maxPromotion)}" th:value="${p}" th:text="${p}"/>
+					</select>
+					<a th:href="@{/archive}"><button id="callConfirm" class="btn btn-danger">Archiver une promotion</button></a>
+				</div>
+				
+				<div th:if="${type=='etudiants'}" class="table-container row">
 		
 				   <div class="col-6">
 				      <a th:href="@{/inscription}"><button class="btn btn-primary" id="btnAjouter">Inscrire un etudiant</button></a>
@@ -131,4 +140,5 @@
 	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/etudiants.js}"></script>
+	<script th:src="@{js/jquery.bootpop.js}"></script>
 </html>
