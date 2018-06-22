@@ -21,8 +21,6 @@ public interface EnseignantPermanentRepository extends JpaRepository<EnseignantP
       QuerydslBindings bindings, QEnseignantPermanent root) {
         bindings.bind(String.class)
           .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
-        bindings.excluding(root.emailPersonnel);
-        bindings.excluding(root.emailProfessionnel);
       }
 	
 	@Query("SELECT motDePasse FROM Enseignant  WHERE id = :enseignantId")

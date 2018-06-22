@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>modifier cadre administratif</title>
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 		<link rel="stylesheet" th:href="@{/css/grh.css}"/>
 	</head>
@@ -42,7 +42,7 @@
                     <div class="form-group col-md-12">
                         	<label for="fonctionEt">Fonction</label>
                         	<select id="fonctionEt" th:field="*{fonction}" required>
-                           		<option th:each="f:${T(org.emi.GestionDesRH.enums.Fonction).values()}" th:value="${f}" th:text="${f}"></option>
+                           		<option th:each="f:${T(ma.ac.emi.info.enums.Fonction).values()}" th:value="${f}" th:text="${f}"></option>
                         	</select>
                     	</div>
                    </div>
@@ -58,7 +58,7 @@
                         <div class="form-group col-md-6">
                         	<label for="gradeEt">Grade</label>
                         	<select id="gradeEt" th:field="*{grade}" required>
-                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+                           		<option th:each="grade:${T(ma.ac.emi.info.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
                         	</select>
                     	</div>
                     </div>
@@ -82,6 +82,10 @@
                             <label for="emailProEt">Email professionnel :</label>
                                 <input type="email" id="emailProEt" class="form-control" th:field="*{emailProfessionnel}" required />
                         </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
                     </div>
                     <div class="form-group col-md-12">
                         <label for="motDePasseEt">Mot de passe :</label>

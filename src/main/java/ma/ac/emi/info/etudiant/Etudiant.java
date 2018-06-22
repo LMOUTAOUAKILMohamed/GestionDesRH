@@ -4,12 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import ma.ac.emi.info.enums.Sexe;
 import ma.ac.emi.info.personne.Personne;
 
@@ -39,9 +41,12 @@ public class Etudiant extends Personne{
 	@Column(name = "CV")
 	private boolean cv = false;
 	
+	@Column(name = "ANNEE_DE_RESERVE")
+	private Integer anneeDeReserve;
+	
 	@Column(name = "PROMOTION")
 	private int promotion;
-
+	
 	public Etudiant() {
 		super();
 	}
@@ -57,7 +62,7 @@ public class Etudiant extends Personne{
 			@Size(max = 40, message = "Un nom et prenom en arabe ne peut pas depasser 40 caractères!") String nomPrenomArabe,
 			@Size(max = 100, message = "Une adresse ne peut pas depasser 100 caractères!") String adresse,
 			String motDePasse, @NotNull Long matricule, Long cNE, int dateInscription, boolean photo, boolean cv,
-			int promotion) {
+			int anneeDeReserve, int promotion) {
 		super(id, nom, prenom, cIN, dateNaissance, sexe, telephone, emailProfessionnel, emailPersonnel, nomPrenomArabe,
 				adresse, motDePasse);
 		this.matricule = matricule;
@@ -65,6 +70,7 @@ public class Etudiant extends Personne{
 		this.dateInscription = dateInscription;
 		this.photo = photo;
 		this.cv = cv;
+		this.anneeDeReserve = anneeDeReserve;
 		this.promotion = promotion;
 	}
 
@@ -90,6 +96,7 @@ public class Etudiant extends Personne{
 
 	public void setDateInscription(int dateInscription) {
 		this.dateInscription = dateInscription;
+		setPromotion(dateInscription + 3);
 	}
 
 	public boolean isPhoto() {
@@ -108,22 +115,20 @@ public class Etudiant extends Personne{
 		this.cv = cv;
 	}
 
+	public Integer getAnneeDeReserve() {
+		return anneeDeReserve;
+	}
+
+	public void setAnneeDeReserve(Integer anneeDeReserve) {
+		this.anneeDeReserve = anneeDeReserve;
+	}
+
 	public int getPromotion() {
 		return promotion;
 	}
 
 	public void setPromotion(int promotion) {
 		this.promotion = promotion;
-	}
-
-	@Override
-	public String toString() {
-		return "Etudiant [matricule=" + matricule + ", CNE=" + CNE + ", dateInscription=" + dateInscription + ", photo="
-				+ photo + ", cv=" + cv + ", promotion=" + promotion + ", id=" + id + ", role=" + role + ", nom=" + nom
-				+ ", prenom=" + prenom + ", CIN=" + CIN + ", dateNaissance=" + dateNaissance + ", sexe=" + sexe
-				+ ", telephone=" + telephone + ", emailProfessionnel=" + emailProfessionnel + ", emailPersonnel="
-				+ emailPersonnel + ", nomPrenomArabe=" + nomPrenomArabe + ", adresse=" + adresse + ", motDePasse="
-				+ motDePasse + "]";
 	}
 
 }

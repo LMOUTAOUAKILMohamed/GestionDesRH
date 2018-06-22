@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<he>
 	<meta charset="UTF-8">
 	<title>Modifier un etudiant</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
@@ -14,8 +14,6 @@
 		<div class="card">
 			<div class="card-header">formulaire de modification</div>
 			<div class="card-body">
-			<span th:text="${type}"></span>
-			<span th:text="${#strings.toString(type)} == 'archive'"></span>
 				<form th:action="${#strings.toString(type)} == 'etudiant' ? @{/AjouterEtudiant} : @{/ModifierEtudiantArchive}" th:object="${etudiant}" method="post" enctype="multipart/form-data" name="etudiantForm">
                   <div class="form-row col-md-12">
                    <div class="form-group col-md-6">
@@ -34,6 +32,13 @@
                     <div class="form-group col-md-12">
                         <label for="cinEt">CIN :</label>
                         <input type="text" id="cinEt" class="form-control" th:field="*{CIN}"/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="cinEt">Année de réserve :</label>
+                        <select class="form-control" id="promotionInput"  th:field="*{anneeDeReserve}">
+                        	<option value=""/>
+							<option th:each="p : ${#numbers.sequence(1, 3)}" th:value="${p}" th:text="${p}"/>
+						</select>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="sexeEt">Sexe :</label>
@@ -81,6 +86,10 @@
                             <label for="emailProEt">Email professionnel :</label>
                                 <input type="email" id="emailProEt" class="form-control" th:field="*{emailProfessionnel}" required />
                         </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
                     </div>
                     <div class="form-group col-md-12">
 			        	<label for="motDePasseEt">Mot de passe :</label>

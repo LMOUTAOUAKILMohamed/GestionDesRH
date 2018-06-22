@@ -55,7 +55,7 @@
                     <div class="form-group col-md-12">
                         <label for="sexeEt">Sexe :</label>
                         <select id="sexeEt" th:field="*{sexe}" required>
-                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                           <option th:each="sexe:${T(ma.ac.emi.info.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
                         </select>
                     </div>
                    </div>
@@ -100,6 +100,10 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
+                    </div>
+                    <div class="form-group col-md-12">
                         <label for="motDePasseEt">Mot de passe :</label>
                         <input type="password" id="motDePasseEt" class="form-control" th:field="*{motDePasse}" required />
                     </div>
@@ -138,13 +142,13 @@
                     <div class="form-group col-md-12">
                         <label for="sexeEP">Sexe :</label>
                         <select id="sexeEP" th:field="*{sexe}" required>
-                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                           <option th:each="sexe:${T(ma.ac.emi.info.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
                         </select>
                     </div>
                     <div class="form-group col-md-12">
                         	<label for="echelleEP">Echelle</label>
                         	<select id="echelleEP" th:field="*{echelle}" required>
-                           		<option th:each="echelle:${T(org.emi.GestionDesRH.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
+                           		<option th:each="echelle:${T(ma.ac.emi.info.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
                         	</select>
                     	</div>
                    </div>
@@ -160,14 +164,14 @@
                         <div class="form-group col-md-6">
                         	<label for="gradeEP">Grade</label>
                         	<select id="gradeEP" th:field="*{grade}" required>
-                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+                           		<option th:each="grade:${T(ma.ac.emi.info.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
                         	</select>
                     	</div>
                     </div>
                     <div class="form-row col-md-12">
                     	<div class="form-group col-md-6">
                             <label for="dateAffectationEP">Date d'affectation :</label>
-                            <input type="date" id="dateAffectaionEP" class="form-control" th:field="*{dateAffectation}" required/>
+                            <input type="text" id="dateAffectaionEP" class="form-control" th:field="*{dateAffectation}" required/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="telephoneEP">Téléphone :</label>
@@ -184,6 +188,10 @@
                             <label for="emailProEP">Email professionnel :</label>
                                 <input type="email" id="emailProEP" class="form-control" th:field="*{emailProfessionnel}" required />
                         </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
                     </div>
                     <div class="form-group col-md-12">
                         <label for="motDePasseEP">Mot de passe :</label>
@@ -228,13 +236,13 @@
                     <div class="form-group col-md-12">
                         <label for="sexeEV">Sexe :</label>
                         <select id="sexeEV" th:field="*{sexe}" required>
-                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                           <option th:each="sexe:${T(ma.ac.emi.info.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
                         </select>
                     </div>
                     <div class="form-group col-md-12">
                         	<label for="echelleEV">Echelle</label>
                         	<select id="echelleEV" th:field="*{echelle}" required>
-                           		<option th:each="echelle:${T(org.emi.GestionDesRH.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
+                           		<option th:each="echelle:${T(ma.ac.emi.info.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
                         	</select>
                     	</div>
                    </div>
@@ -250,14 +258,14 @@
                         <div class="form-group col-md-6">
                         	<label for="gradeEV">Grade</label>
                         	<select id="gradeEV" th:field="*{grade}" required>
-                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+                           		<option th:each="grade:${T(ma.ac.emi.info.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
                         	</select>
                     	</div>
                     </div>
                     <div class="form-row col-md-12">
                     	<div class="form-group col-md-6">
                             <label for="dateAffectationEV">Date d'affectation :</label>
-                            <input type="date" id="dateAffectationEV" class="form-control" th:field="*{dateAffectation}" required/>
+                            <input type="text" id="dateAffectationEV" class="form-control" th:field="*{dateAffectation}" required/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="telephoneEV">Téléphone :</label>
@@ -274,6 +282,10 @@
                             <label for="emailProEV">Email professionnel :</label>
                                 <input type="email" id="emailProEV" class="form-control" th:field="*{emailProfessionnel}" required />
                         </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
                     </div>
                     <div class="form-group col-md-12">
                         <label for="motDePasseEV">Mot de passe :</label>
@@ -315,13 +327,13 @@
                     <div class="form-group col-md-12">
                         <label for="sexeCA">Sexe :</label>
                         <select id="sexeCA" th:field="*{sexe}" required>
-                           <option th:each="sexe:${T(org.emi.GestionDesRH.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
+                           <option th:each="sexe:${T(ma.ac.emi.info.enums.Sexe).values()}" th:value="${sexe}" th:text="${sexe}">Masculin</option>
                         </select>
                     </div>
                     <div class="form-group col-md-12">
                         	<label for="fonctionCA">Fonction</label>
                         	<select id="fonctionCA" th:field="*{fonction}" required>
-                           		<option th:each="f:${T(org.emi.GestionDesRH.enums.Fonction).values()}" th:value="${f}" th:text="${f}"></option>
+                           		<option th:each="f:${T(ma.ac.emi.info.enums.Fonction).values()}" th:value="${f}" th:text="${f}"></option>
                         	</select>
                     	</div>
                    </div>
@@ -337,7 +349,7 @@
                         <div class="form-group col-md-6">
                         	<label for="gradeCA">Grade</label>
                         	<select id="gradeCA" th:field="*{grade}" required>
-                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+                           		<option th:each="grade:${T(ma.ac.emi.info.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
                         	</select>
                     	</div>
                     </div>
@@ -361,6 +373,10 @@
                             <label for="emailProCA">Email professionnel :</label>
                                 <input type="email" id="emailProCA" class="form-control" th:field="*{emailProfessionnel}" required />
                         </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="motDePasseEt">Adresse :</label>
+                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
                     </div>
                     <div class="form-group col-md-12">
                         <label for="motDePasseCA">Mot de passe :</label>

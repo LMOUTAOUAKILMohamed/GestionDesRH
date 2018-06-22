@@ -37,7 +37,7 @@ public class EtudiantController {
 	EtudiantService etudiantService;
 	
 	@Value("${upload.images}") 
-	private String shemin;
+	private String chemin;
 	
 	@RequestMapping(path="/AjouterEtudiant", method = RequestMethod.POST)
 	public String AjouterEtudiant(Etudiant e, @RequestParam("imageEtudiant") MultipartFile multipartFile) throws IOException {
@@ -51,8 +51,7 @@ public class EtudiantController {
 				if(/*partImageEtudiant*/!multipartFile.isEmpty()) 
 				{
 					System.out.println(multipartFile.isEmpty());
-					System.out.println("passeee");
-					File file = new File(shemin, String.valueOf(ei.getId()) + ".jpg");
+					File file = new File(chemin, String.valueOf(ei.getId()) + ".jpg");
 					
 					try (InputStream input = multipartFile.getInputStream()) {
 					    Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -61,7 +60,7 @@ public class EtudiantController {
 				}
 			}
 		
-		return "redirect:/allEtudiants";
+		return "redirect:/etudiants";
 	}
 	
 	@PostMapping("/modifierEtudiant")
@@ -103,8 +102,14 @@ public class EtudiantController {
 	
 	@GetMapping("/etudiants")
 	public String allEtudiants(Model model) {
-		model.addAttribute("minPromotion", etudiantService.getMinPromotion());
-		model.addAttribute("maxPromotion", etudiantService.getMaxPromotion());
+		Integer minPromo = etudiantService.getMinPromotion();
+		Integer maxPromo = etudiantService.getMaxPromotion();
+		if(minPromo == null)
+			minPromo = 0;
+		if(maxPromo == null)
+			maxPromo = 0;
+		model.addAttribute("minPromotion", minPromo);
+		model.addAttribute("maxPromotion", maxPromo);
 		model.addAttribute("type", "etudiants");
 		return "etudiants";
 	}
@@ -112,7 +117,13 @@ public class EtudiantController {
 	@PostMapping("/importExcelFile")
 	public String importExcelFile(Model model, @RequestParam("ExcelFile") MultipartFile multipartFile ) throws IOException, ParseException {
 		etudiantService.processExcelSheet(multipartFile.getInputStream());
-		return "etudiants";
+		return "redirect:/etudiants";
+	}
+	
+	@GetMapping("/SupprimerEtudiant")
+	public String supprimerEtudiant(@RequestParam("id") Long id) {
+		etudiantService.supprimer(id);
+		return "redirect:/etudiants";
 	}
 	
 

@@ -28,7 +28,10 @@ public class DetailsUtilisateurService implements UserDetailsService{
 		
 		UserBuilder builder = null;
 		
+		System.out.println("alllll = " + enseignantPermanentRepository.findAll());
+		
 		Personne user = enseignantPermanentRepository.findByEmailProfessionnel(emailprofessionnel);
+		System.out.println("user = " + user);
 		if(user == null)
 			user = enseignantVacataireRepository.findByEmailProfessionnel(emailprofessionnel);
 		if(user == null)
@@ -36,8 +39,8 @@ public class DetailsUtilisateurService implements UserDetailsService{
 		if(user == null)
 			throw new UsernameNotFoundException("Aucun utilisateur existe avec l'email " + emailprofessionnel );
 		
-		System.out.println(user);
-		
+		System.out.println("role = " + user.getRole());
+		System.out.println("alllll = " + enseignantPermanentRepository.findAll());
 		builder = User.withUsername(emailprofessionnel);
 		builder.password(user.getMotDePasse());
 		builder.authorities(user.getRole());

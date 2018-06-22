@@ -42,8 +42,6 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> , Quer
       QuerydslBindings bindings, QEtudiant root) {
         bindings.bind(String.class)
           .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
-        bindings.excluding(root.emailPersonnel);
-        bindings.excluding(root.emailProfessionnel);
       }
 	
 }

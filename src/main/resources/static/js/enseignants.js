@@ -30,6 +30,7 @@ $(document).ready(function() {
 				        });
 						$('#currentPage').text("" + (result.number + 1));
 						$('#totalPages').text("" + (result.totalPages));
+						$('#totalElements').text("" + (result.totalElements));
 						
 					},
 					error : function(e) {
@@ -79,11 +80,6 @@ $(document).ready(function() {
 					if (params != "") divider = '&' ;
 					params = params + divider + 'emailPersonnel=' + $('#emailPersoInput').val();
 				}
-				if($('#sexeInput').val() != ""){
-					var divider = "";
-					if (params != "") divider = '&' ;
-					params = params + divider + 'sexe=' + $('#sexeInput').val();
-				}
 				
 				if($('#adresse').val() != ""){
 					var divider = "";
@@ -120,6 +116,7 @@ $(document).ready(function() {
 			function enseignantToRow(i, enseignant){
 				var type = window.location.pathname == "/enseignantsPermanents" ? "EP" : "EV" ;
 				var actionModifier = window.location.pathname == "/enseignantsPermanents" ? "/ModifierEnseignantPermanent/" : "/ModifierEnseignantVacataire/" ;
+				var actionSupprimer = window.location.pathname == "/enseignantsPermanents" ? "/SupprimerEP/" : "/SupprimerEV/" ;
 				var infoDiff = "";
 				if(type == "EV"){
 					var etatPaiement;
@@ -134,11 +131,11 @@ $(document).ready(function() {
 				'<td>' + enseignant.prenom + '</td>' +
 				'<td>' + enseignant.dateAffectation + '</td>' +
 				'<td>' + enseignant.telephone + '</td>' +
-				'<td>' + enseignant.emailProfessionnel + '</td>' +
+				'<td>' + verifyNull(enseignant.emailProfessionnel) + '</td>' +
 				'<td>' +
 					'<div class="btn-group">'+
 					 '<a href="' + actionModifier + '?id=' + enseignant.id + '"><button class="btn btn-primary" >modifier</button></a>'+
-					 //'<a href="/SupprimerEnseignant/?id=' + enseignant.id + '" ><button class="btn btn-danger" >supprimer</button></a>'+
+					 '<a href="' + actionSupprimer + '?id=' + enseignant.id + '" ><button class="btn btn-danger" style="margin-left:20px;">supprimer</button></a>'+
 					'</div>'
 				+ '</td>' +
 			  	'</tr>'
@@ -174,4 +171,10 @@ $(document).ready(function() {
 			$(divId).each(function () {
 			    $(this).val(''); // "this" is the current element in the loop
 			});
+		}
+		
+		function verifyNull(item){
+			if( item == null)
+				return "-";
+			return item;
 		}

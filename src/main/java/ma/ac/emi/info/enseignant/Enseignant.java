@@ -1,16 +1,20 @@
 package ma.ac.emi.info.enseignant;
 
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import ma.ac.emi.info.enums.Echelle;
 import ma.ac.emi.info.enums.Grade;
 import ma.ac.emi.info.enums.Sexe;
@@ -27,15 +31,15 @@ public class Enseignant extends Personne{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	//@NotNull
 	@Column(name = "DATE_AFFECTATION")
-	protected int dateAffectation;
+	protected Integer dateAffectation;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "ECHELLE")
 	protected Echelle echelle;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "GRADE", length = 3)
 	protected Grade grade;
 
@@ -54,7 +58,7 @@ public class Enseignant extends Personne{
 			@Size(max = 40, message = "Un email ne peut pas depasser 40 caractères!") String emailPersonnel,
 			@Size(max = 40, message = "Un nom et prenom en arabe ne peut pas depasser 40 caractères!") String nomPrenomArabe,
 			@Size(max = 100, message = "Une adresse ne peut pas depasser 100 caractères!") String adresse,
-			String motDePasse, @NotNull int dateAffectation, @NotNull Echelle echelle, @NotNull Grade grade) {
+			String motDePasse, @NotNull Integer dateAffectation, @NotNull Echelle echelle, @NotNull Grade grade) {
 		super(id, nom, prenom, cIN, dateNaissance, sexe, telephone, emailProfessionnel, emailPersonnel, nomPrenomArabe,
 				adresse, motDePasse);
 		this.dateAffectation = dateAffectation;
@@ -62,11 +66,11 @@ public class Enseignant extends Personne{
 		this.grade = grade;
 	}
 
-	public int getDateAffectation() {
+	public Integer getDateAffectation() {
 		return dateAffectation;
 	}
 
-	public void setDateAffectation(int dateAffectation) {
+	public void setDateAffectation(Integer dateAffectation) {
 		this.dateAffectation = dateAffectation;
 	}
 

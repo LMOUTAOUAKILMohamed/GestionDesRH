@@ -37,6 +37,9 @@ public class EtudiantArchive extends Personne{
 	@Column(name = "CV")
 	private boolean cv = false;
 	
+	@Column(name = "ANNEE_DE_RESERVE")
+	private Integer anneeDeReserve;
+	
 	@Column(name = "PROMOTION")
 	private int promotion;
 	
@@ -76,6 +79,7 @@ public class EtudiantArchive extends Personne{
 		photo = etudiant.isPhoto();
 		promotion = etudiant.getPromotion();
 		cv = etudiant.isCv();
+		anneeDeReserve = etudiant.getAnneeDeReserve();
 	}
 
 	public Long getMatricule() {
@@ -125,7 +129,13 @@ public class EtudiantArchive extends Personne{
 	public void setCv(boolean cv) {
 		this.cv = cv;
 	}
-	
-	
+
+	public Integer getAnneeDeReserve() {
+		return anneeDeReserve;
+	}
+
+	public void setAnneeDeReserve(Integer anneeDeReserve) {
+		this.anneeDeReserve = anneeDeReserve;
+	}
 
 }

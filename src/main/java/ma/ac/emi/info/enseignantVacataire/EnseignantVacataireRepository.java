@@ -21,9 +21,7 @@ public interface EnseignantVacataireRepository extends JpaRepository<EnseignantV
       QuerydslBindings bindings, QEnseignantVacataire root) {
         bindings.bind(String.class)
           .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
-        bindings.excluding(root.emailPersonnel);
-        bindings.excluding(root.emailProfessionnel);
-      }
+	}
 	
 	@Query("SELECT motDePasse FROM Enseignant  WHERE id = :enseignantId")
 	public String getPasswordById(@Param("enseignantId") Long enseignantId);

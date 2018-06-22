@@ -27,7 +27,7 @@ public class EtudiantArchiveController {
 		return "etudiants";
 	}
 	
-	@GetMapping("/archiver")
+	@PostMapping("/archiver")
 	public String archiver(Model model, @RequestParam("promotion") int promotion) {
 		etudiantArchiveService.archiver(promotion);
 		return "redirect:/archive";
@@ -53,7 +53,12 @@ public class EtudiantArchiveController {
             @RequestParam(value = "page", defaultValue="0") int page, @RequestParam(value = "size", defaultValue="10") int size) {
 		
 	    return etudiantArchiveService.findAll(predicate, PageRequest.of(page, size));
-		
+	}
+	
+	@GetMapping("SupprimerEtudiantArchive")
+	public String supprimerEV(@RequestParam("id") Long id) {
+		etudiantArchiveService.supprimer(id);
+		return "redirect:/archive";
 	}
 
 }

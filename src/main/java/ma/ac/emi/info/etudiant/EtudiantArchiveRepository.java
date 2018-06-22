@@ -24,8 +24,6 @@ public interface EtudiantArchiveRepository extends JpaRepository<EtudiantArchive
       QuerydslBindings bindings, QEtudiantArchive root) {
         bindings.bind(String.class)
           .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
-        bindings.excluding(root.emailPersonnel);
-        bindings.excluding(root.emailProfessionnel);
       }
 
 }

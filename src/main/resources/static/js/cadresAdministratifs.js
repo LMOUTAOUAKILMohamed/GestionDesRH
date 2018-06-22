@@ -23,6 +23,7 @@ $(document).ready(function() {
 				        });
 						$('#currentPage').text("" + (result.number + 1));
 						$('#totalPages').text("" + (result.totalPages));
+						$('#totalElements').text("" + (result.totalElements));
 						
 					},
 					error : function(e) {
@@ -60,11 +61,11 @@ $(document).ready(function() {
 				'<td>' + cadreAdministratif.prenom + '</td>' +
 				'<td>' + cadreAdministratif.dateAffectation + '</td>' +
 				'<td>' + cadreAdministratif.telephone + '</td>' +
-				'<td>' + cadreAdministratif.emailProfessionnel + '</td>' +
+				'<td>' + verifyNull(cadreAdministratif.emailProfessionnel) + '</td>' +
 				'<td>' +
 					'<div class="btn-group">'+
 					 '<a href="/ModifierCadreAdministratif/?id=' + cadreAdministratif.id + '"><button class="btn btn-primary" >modifier</button></a>'+
-					 //'<a href="/SupprimerCadreAdministratif/?id=' + cadreAdministratif.id + '" ><button class="btn btn-danger" >supprimer</button></a>'+
+					 '<a href="/SupprimerCadreAdministratif/?id=' + cadreAdministratif.id + '" ><button class="btn btn-danger" style="margin-left:20px;" >supprimer</button></a>'+
 					'</div>'
 				+ '</td>' +
 			  	'</tr>'
@@ -98,4 +99,10 @@ $(document).ready(function() {
 			$(divId).each(function () {
 			    $(this).val(''); // "this" is the current element in the loop
 			});
+			}
+			
+			function verifyNull(item){
+				if( item == null)
+					return "-";
+				return item;
 			}

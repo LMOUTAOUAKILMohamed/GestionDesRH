@@ -38,12 +38,12 @@ public abstract class Personne implements Serializable{
 	@Column(name = "ROLE")
 	protected String role;
 	
-	@NotNull
+	//@NotNull
 	@Size( max = 30 , message = "Un nom ne peut pas depasser 30 caractères!")
 	@Column(name = "NOM")
 	protected String nom;
 	
-	@NotNull
+	//@NotNull
 	@Size( max = 20 , message = "Un prenom ne peut pas depasser 20 caractères!")
 	@Column(name = "PRENOM")
 	protected String prenom;
@@ -227,7 +227,6 @@ public abstract class Personne implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((CIN == null) ? 0 : CIN.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -241,17 +240,20 @@ public abstract class Personne implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Personne other = (Personne) obj;
-		if (CIN == null) {
-			if (other.CIN != null)
-				return false;
-		} else if (!CIN.equals(other.CIN))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Personne [id=" + id + ", role=" + role + ", nom=" + nom + ", prenom=" + prenom + ", CIN=" + CIN
+				+ ", dateNaissance=" + dateNaissance + ", sexe=" + sexe + ", telephone=" + telephone
+				+ ", emailProfessionnel=" + emailProfessionnel + ", emailPersonnel=" + emailPersonnel
+				+ ", nomPrenomArabe=" + nomPrenomArabe + ", adresse=" + adresse + ", motDePasse=" + motDePasse + "]";
 	}
 	
 }

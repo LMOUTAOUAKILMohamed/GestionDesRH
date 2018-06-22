@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Modifier les informations</title>
+		<title>Modifier enseignant</title>
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 		<link rel="stylesheet" th:href="@{/css/grh.css}"/>
 	</head>
@@ -44,7 +44,7 @@
 		                    <div class="form-group col-md-12">
 		                        	<label for="echelleEt">Echelle</label>
 		                        	<select id="echelleEt" th:field="*{echelle}" required>
-		                           		<option th:each="echelle:${T(org.emi.GestionDesRH.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
+		                           		<option th:each="echelle:${T(ma.ac.emi.info.enums.Echelle).values()}" th:value="${echelle}" th:text="${echelle}"></option>
 		                        	</select>
 		                    	</div>
 		                   </div>
@@ -60,7 +60,7 @@
 		                        <div class="form-group col-md-6">
 		                        	<label for="gradeEt">Grade</label>
 		                        	<select id="gradeEt" th:field="*{grade}" required>
-		                           		<option th:each="grade:${T(org.emi.GestionDesRH.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
+		                           		<option th:each="grade:${T(ma.ac.emi.info.enums.Grade).values()}" th:value="${grade}" th:text="${grade}"></option>
 		                        	</select>
 		                    	</div>
 		                    </div>
@@ -92,6 +92,10 @@
 		                            <label for="etatPaiement">Etat de Payement :</label>
 		                            <input type="checkbox" id="etatPaiement" class="form-control" th:field="*{etatPaiement}" />
 		                        </div>
+		                        <div class="form-group col-md-12">
+			                        <label for="motDePasseEt">Adresse :</label>
+			                        <input type="text" id="adresseEt" class="form-control" th:field="*{adresse}" />
+			                    </div>
 		                        <div class="form-group col-md-12">
 			                        <label for="motDePasseEt">Mot de passe :</label>
 			                        <input type="password" id="motDePasseEt" class="form-control" th:field="*{motDePasse}"/>

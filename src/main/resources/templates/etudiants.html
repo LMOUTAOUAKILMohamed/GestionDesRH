@@ -2,7 +2,7 @@
 <html >
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Liste des etudiants</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/grh.css}"/>
 	<link th:href="@{css/jquery.bootpop.css}" rel="stylesheet" type="text/css">
@@ -47,9 +47,9 @@
 			<div class="col">
 				<input class="form-control" type="text" id="adresse" placeholder="adresse"/>
 			</div>
-			<div class="col mb-3">
+			<div class="col mb-3 ">
 				<select class="form-control" id="promotionInput" >
-					<option th:each="p : ${#numbers.sequence(minPromotion, maxPromotion)}" th:value="${p}" th:text="${p}"/>
+					<option th:each="p : ${#numbers.sequence(maxPromotion, minPromotion)}" th:value="${p}" th:text="${p}"/>
 				</select>
 			</div>
 			<div class="col">
@@ -68,11 +68,15 @@
 			<div th:if="${type=='etudiants'}" class="card-header">Liste des étudiants</div>
 			<div th:if="${type=='archive'}" class="card-header">Archive des étudiants</div>
 			<div class="card-body">
-				<div class="row" th:if="${type=='etudiants'}">
-					<select class="form-control col-2" id="promotionInput" >
-						<option th:each="p : ${#numbers.sequence(minPromotion, maxPromotion)}" th:value="${p}" th:text="${p}"/>
+				<div class="row" style="margin-left:20px;" th:if="${type=='etudiants' and minPromotion != 0}">
+				<form th:action="@{/archiver}" method="post">
+					
+					<select class="form-control" name="promotion" id="promotionInput" >
+						<option th:each="p : ${#numbers.sequence(maxPromotion, minPromotion)}" th:value="${p}" th:text="${p}"/>
 					</select>
-					<a th:href="@{/archive}"><button id="callConfirm" class="btn btn-danger">Archiver une promotion</button></a>
+					<input type="submit" value="Archiver une promotion" id="callConfirm" class="btn btn-danger"/>
+					
+				</form>
 				</div>
 				
 				<div th:if="${type=='etudiants'}" class="table-container row">
@@ -84,10 +88,7 @@
 				   <div class="col-6">
 				   	  <form th:action="@{/importExcelFile}" method="post" enctype="multipart/form-data">
 						<div class="input-group">
-						  <div class="custom-file">
-						    <input class="custom-file-input" type="file" id="importExcelFile" name="ExcelFile"/>
-						    <label class="custom-file-label" for="inputGroupFile04">Choisir un fichier Excel</label>
-						  </div>
+						    <input class="form-control" type="file" id="importExcelFile" name="ExcelFile"/>
 						  <div class="input-group-append">
 						   <input class="btn btn-success" type="submit" value="Inscrire la liste Excel"/>
 						  </div>
