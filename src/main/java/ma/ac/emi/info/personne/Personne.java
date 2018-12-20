@@ -38,7 +38,7 @@ public abstract class Personne implements Serializable{
 	@Column(name = "ROLE")
 	protected String role;
 	
-	//@NotNull
+	@NotNull
 	@Size( max = 30 , message = "Un nom ne peut pas depasser 30 caractères!")
 	@Column(name = "NOM")
 	protected String nom;

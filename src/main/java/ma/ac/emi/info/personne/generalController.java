@@ -37,7 +37,6 @@ public class generalController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(Principal principal) {
 		
-		System.out.println(principal);
         return principal == null ?  "login" : "redirect:/"; 
     }
 	

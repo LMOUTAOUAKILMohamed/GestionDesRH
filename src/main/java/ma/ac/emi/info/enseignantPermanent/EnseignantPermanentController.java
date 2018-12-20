@@ -68,10 +68,10 @@ public class EnseignantPermanentController {
 		return "redirect:/enseignantsPermanents";
 	}
 	
-	@GetMapping("SupprimerEP")
-	public String supprimerEV(@RequestParam("id") Long id) {
-		enseignantPermanentService.supprimer(id);
-		return "redirect:/enseignantsPermanents";
-	}
+//	@GetMapping("SupprimerEP")
+//	public String supprimerEV(@RequestParam("id") Long id) {
+//		enseignantPermanentService.supprimer(id);
+//		return "redirect:/enseignantsPermanents";
+//	}
 	
 }

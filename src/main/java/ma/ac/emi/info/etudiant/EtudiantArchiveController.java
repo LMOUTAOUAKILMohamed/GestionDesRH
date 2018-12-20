@@ -55,10 +55,10 @@ public class EtudiantArchiveController {
 	    return etudiantArchiveService.findAll(predicate, PageRequest.of(page, size));
 	}
 	
-	@GetMapping("SupprimerEtudiantArchive")
-	public String supprimerEV(@RequestParam("id") Long id) {
-		etudiantArchiveService.supprimer(id);
-		return "redirect:/archive";
-	}
+//	@GetMapping("SupprimerEtudiantArchive")
+//	public String supprimerEV(@RequestParam("id") Long id) {
+//		etudiantArchiveService.supprimer(id);
+//		return "redirect:/archive";
+//	}
 
 }

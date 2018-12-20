@@ -14,6 +14,7 @@ import ma.ac.emi.info.etudiant.EtudiantRepository;
 
 @Service
 public class DetailsUtilisateurService implements UserDetailsService{
+	
 	@Autowired
 	EtudiantRepository etudiantRepository;
 	
@@ -23,15 +24,16 @@ public class DetailsUtilisateurService implements UserDetailsService{
 	@Autowired
 	EnseignantVacataireRepository enseignantVacataireRepository;
 	
+	public DetailsUtilisateurService(EnseignantPermanentRepository enseignantPermanentRepository) {
+		this.enseignantPermanentRepository = enseignantPermanentRepository;
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String emailprofessionnel) throws UsernameNotFoundException{
 		
 		UserBuilder builder = null;
 		
-		System.out.println("alllll = " + enseignantPermanentRepository.findAll());
-		
 		Personne user = enseignantPermanentRepository.findByEmailProfessionnel(emailprofessionnel);
-		System.out.println("user = " + user);
 		if(user == null)
 			user = enseignantVacataireRepository.findByEmailProfessionnel(emailprofessionnel);
 		if(user == null)
@@ -39,8 +41,6 @@ public class DetailsUtilisateurService implements UserDetailsService{
 		if(user == null)
 			throw new UsernameNotFoundException("Aucun utilisateur existe avec l'email " + emailprofessionnel );
 		
-		System.out.println("role = " + user.getRole());
-		System.out.println("alllll = " + enseignantPermanentRepository.findAll());
 		builder = User.withUsername(emailprofessionnel);
 		builder.password(user.getMotDePasse());
 		builder.authorities(user.getRole());
@@ -48,4 +48,23 @@ public class DetailsUtilisateurService implements UserDetailsService{
 		return builder.build();
 		
 	}
+	
+	public boolean isValidLogin(String login) {
+		
+		if(loadUserByUsername(login) == null)
+			return false;
+		
+		return login == loadUserByUsername(login).getUsername() ? true : false;
+		
+	}
+
+	public boolean isValidLoginPassword(String login, String password) {
+		
+		if(loadUserByUsername(login) == null)
+			return false;
+		
+		return login == loadUserByUsername(login).getUsername() && password == loadUserByUsername(login).getPassword() ? true : false;
+		
+	}
+	
 }
